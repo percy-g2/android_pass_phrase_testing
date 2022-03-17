@@ -22,15 +22,14 @@ class MainViewModel : ViewModel() {
 
     fun generateRandom(n: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-
             val v: ArrayList<Int> = ArrayList(n)
-            val xyz = mutableListOf<String>()
+            val randomList = mutableListOf<String>()
 
             for (i in 0 until n) v.add(i.plus(1))
             while (v.size > 0) {
-                xyz.add(listOfPhase[getNum(v) - 1] + "\n")
+                randomList.add(listOfPhase[getNum(v) - 1] + "\n")
             }
-            randomListString.postValue(xyz.joinToString().replace(",", ""))
+            randomListString.postValue(randomList.joinToString().replace(",", ""))
         }
     }
 

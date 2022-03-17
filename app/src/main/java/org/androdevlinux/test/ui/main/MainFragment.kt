@@ -29,11 +29,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.randomListString.observe(viewLifecycleOwner) {
             binding.value.text = it.toString()
         }
+
+        viewModel.generateRandom(12)
 
         binding.refreshBtn.setOnClickListener {
             viewModel.generateRandom(12)
