@@ -29,9 +29,9 @@ class MainViewModel : ViewModel() {
             for (i in 0 until n) v.add(i.plus(1))
             while (v.size > 0) {
                 val position = getNum(v) - 1
-                val test = listOfPhase.map { it.key }[position]
+                val key = listOfPhase.map { it.key }[position]
                 val value = listOfPhase.map { it.value }[position]
-                randomList.add(PassPhrase(test, value))
+                randomList.add(PassPhrase(key, value))
             }
             randomListString.postValue(randomList)
         }
