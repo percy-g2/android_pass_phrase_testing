@@ -67,8 +67,8 @@ class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
         holder.textView.apply {
             text = data.passPhrase
             setBackgroundColor(context.resources.getColor(data.passPhraseColor, context.theme))
-            if (data.passPhraseColor == R.color.yellow || data.passPhraseColor == R.color.turquoise) setTextColor(context.resources.getColorStateList(R.color.black, context.theme))
-           // setTextColor(context.resources.getColorStateList(data.passPhraseColor, context.theme))
+            if (data.passPhraseColor == R.color.yellow || data.passPhraseColor == R.color.turquoise || data.passPhraseColor == R.color.light_brown || data.passPhraseColor == R.color.orange || data.passPhraseColor == R.color.light_green) setTextColor(context.resources.getColorStateList(R.color.black, context.theme))
+            if (data.passPhraseColor == R.color.dark_blue || data.passPhraseColor == R.color.pink) setTextColor(context.resources.getColorStateList(R.color.white, context.theme))
         }
     }
 
