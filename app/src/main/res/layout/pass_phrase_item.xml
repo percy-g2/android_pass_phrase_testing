@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="24sp"
+            android:textStyle="bold"
             android:textColor="#F2F5F7"
             tools:text="Phrase" />
     </androidx.cardview.widget.CardView>
