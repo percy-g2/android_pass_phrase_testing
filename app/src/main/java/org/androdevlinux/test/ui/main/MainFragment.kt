@@ -15,10 +15,6 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
