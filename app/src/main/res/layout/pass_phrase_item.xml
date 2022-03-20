@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="6dp"
-        app:cardElevation="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:cardElevation="4dp">
 
         <TextView
             android:id="@+id/tv_phrase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="#F2F5F7"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#F2F5F7"
             tools:text="Phrase" />
     </androidx.cardview.widget.CardView>
 </LinearLayout>
