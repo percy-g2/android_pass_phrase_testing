@@ -33,12 +33,12 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        val customAdapter = CustomAdapter()
+        val passPhraseAdapter = PassPhraseAdapter()
         binding.passPhraseRecyclerView.apply {
-            adapter = customAdapter
+            adapter = passPhraseAdapter
         }
         viewModel.randomListString.observe(viewLifecycleOwner) {
-            customAdapter.updateList(it)
+            passPhraseAdapter.updateList(it)
         }
 
         viewModel.generateRandom(12)
@@ -49,42 +49,33 @@ class MainFragment : Fragment() {
     }
 }
 
-class CustomAdapter : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-
+class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
     private var passPhraseList = listOf<MainViewModel.PassPhrase>()
-    // create new views
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.pass_phrase_item, parent, false)
 
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.pass_phrase_item, parent, false))
 
     fun updateList(mList: List<MainViewModel.PassPhrase>) {
         passPhraseList = mList
         notifyDataSetChanged()
     }
 
-    // binds the list items to a view
+    // binds items to view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val ItemsViewModel = passPhraseList[position]
-        // sets the text to the textview from our itemHolder class
+        val data = passPhraseList[position]
         holder.textView.apply {
-            text = ItemsViewModel.passPhrase
-            setTextColor(context.resources.getColor(ItemsViewModel.passPhraseColor))
+            text = data.passPhrase
+            setBackgroundColor(context.resources.getColor(data.passPhraseColor, context.theme))
+            if (data.passPhraseColor == R.color.yellow || data.passPhraseColor == R.color.turquoise) setTextColor(context.resources.getColorStateList(R.color.black, context.theme))
+           // setTextColor(context.resources.getColorStateList(data.passPhraseColor, context.theme))
         }
-
     }
 
-    // return the number of the items in the list
     override fun getItemCount(): Int {
         return passPhraseList.size
     }
 
-    // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val textView: TextView = itemView.findViewById(R.id.tv_phrase)
     }
