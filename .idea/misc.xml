@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/custom_popup_view.xml" value="0.1755" />
+        <entry key="app/src/main/res/layout/custom_popup_view.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/pass_phrase_item.xml" value="0.19610507246376813" />
       </map>

@@ -9,20 +9,38 @@
     android:padding="16dp"
     tools:context=".ui.main.MainFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/refreshBtn"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:layout_gravity="center"
-        android:text="@string/Refresh"
-        android:drawableEnd="@drawable/ic_refresh"
-        android:textAllCaps="false"
-        android:textAlignment="viewStart"
-        app:cornerRadius="6dp"
-        app:strokeColor="@color/teal_200"
-        tools:ignore="RtlCompat" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/refreshBtn"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:drawableEnd="@drawable/ic_refresh"
+            android:text="@string/Refresh"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            app:cornerRadius="6dp"
+            app:strokeColor="@color/teal_200"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/copyPassPhrasesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/copy_content"
+            android:src="@drawable/ic_copy" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/passPhraseRecyclerView"

@@ -1,5 +1,8 @@
 package org.androdevlinux.test.ui.main
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import org.androdevlinux.test.R
 import org.androdevlinux.test.databinding.MainFragmentBinding
 import org.androdevlinux.test.databinding.PassPhraseItemBinding
+import org.androdevlinux.test.ktx.showCustomPopup
+
 
 class MainFragment : Fragment() {
 
@@ -30,18 +35,29 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         val passPhraseAdapter = PassPhraseAdapter()
-        binding.passPhraseRecyclerView.apply {
-            adapter = passPhraseAdapter
+        binding.apply {
+            passPhraseRecyclerView.apply {
+                adapter = passPhraseAdapter
+            }
+            refreshBtn.setOnClickListener {
+                viewModel.generateRandom(12)
+            }
+            copyPassPhrasesBtn.setOnClickListener {
+                val clipboard: ClipboardManager? =
+                    requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+                val clip = ClipData.newPlainText(
+                    "PassPhrases",
+                    viewModel.randomListString.value?.map { it.passPhrase }.toString()
+                )
+                clipboard?.setPrimaryClip(clip)
+                requireContext().showCustomPopup("Pass phrases copied")
+            }
         }
         viewModel.randomListString.observe(viewLifecycleOwner) {
             passPhraseAdapter.updateList(it)
         }
 
         viewModel.generateRandom(12)
-
-        binding.refreshBtn.setOnClickListener {
-            viewModel.generateRandom(12)
-        }
     }
 }
 
@@ -66,15 +82,14 @@ class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
             setBackgroundColor(context.resources.getColor(data.passPhraseColor, context.theme))
             if (data.passPhraseColor == R.color.yellow || data.passPhraseColor == R.color.turquoise
                 || data.passPhraseColor == R.color.light_brown || data.passPhraseColor == R.color.orange
-                || data.passPhraseColor == R.color.light_green
-            ) setTextColor(
-                context.resources.getColorStateList(R.color.black, context.theme)
-            )
+                || data.passPhraseColor == R.color.light_green) {
+                setTextColor(context.resources.getColorStateList(R.color.black, context.theme))
+            }
             if (data.passPhraseColor == R.color.dark_blue || data.passPhraseColor == R.color.pink ||
                 data.passPhraseColor == R.color.black || data.passPhraseColor == R.color.light_blue
-                || data.passPhraseColor == R.color.red || data.passPhraseColor == R.color.indigio
-            )
+                || data.passPhraseColor == R.color.red || data.passPhraseColor == R.color.indigio) {
                 setTextColor(context.resources.getColorStateList(R.color.white, context.theme))
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Passphrase</string>
     <string name="Refresh">Refresh</string>
+    <string name="copy_content">copy-content</string>
 </resources>
