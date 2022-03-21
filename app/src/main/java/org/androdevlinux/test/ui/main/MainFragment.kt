@@ -15,9 +15,7 @@ import org.androdevlinux.test.databinding.MainFragmentBinding
 import org.androdevlinux.test.databinding.PassPhraseItemBinding
 import org.androdevlinux.test.ktx.showCustomPopup
 
-
 class MainFragment : Fragment() {
-
     private lateinit var binding: MainFragmentBinding
 
     private lateinit var viewModel: MainViewModel
