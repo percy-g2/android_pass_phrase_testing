@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import org.androdevlinux.test.R
 import org.androdevlinux.test.databinding.MainFragmentBinding
+import org.androdevlinux.test.databinding.PassPhraseItemBinding
 
 class MainFragment : Fragment() {
 
@@ -50,8 +50,7 @@ class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.pass_phrase_item, parent, false)
+            PassPhraseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
     fun updateList(mList: List<MainViewModel.PassPhrase>) {
@@ -62,25 +61,24 @@ class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
     // binds items to view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = passPhraseList[position]
-        holder.textView.apply {
+        holder.binding.tvPhrase.apply {
             text = data.passPhrase
             setBackgroundColor(context.resources.getColor(data.passPhraseColor, context.theme))
             if (data.passPhraseColor == R.color.yellow || data.passPhraseColor == R.color.turquoise
                 || data.passPhraseColor == R.color.light_brown || data.passPhraseColor == R.color.orange
-                || data.passPhraseColor == R.color.light_green) setTextColor(
-                context.resources.getColorStateList(R.color.black, context.theme))
+                || data.passPhraseColor == R.color.light_green
+            ) setTextColor(
+                context.resources.getColorStateList(R.color.black, context.theme)
+            )
             if (data.passPhraseColor == R.color.dark_blue || data.passPhraseColor == R.color.pink ||
                 data.passPhraseColor == R.color.black || data.passPhraseColor == R.color.light_blue
-                || data.passPhraseColor == R.color.red || data.passPhraseColor == R.color.indigio)
-                    setTextColor(context.resources.getColorStateList(R.color.white, context.theme))
+                || data.passPhraseColor == R.color.red || data.passPhraseColor == R.color.indigio
+            )
+                setTextColor(context.resources.getColorStateList(R.color.white, context.theme))
         }
     }
 
-    override fun getItemCount(): Int {
-        return passPhraseList.size
-    }
+    override fun getItemCount(): Int = passPhraseList.size
 
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val textView: TextView = itemView.findViewById(R.id.tv_phrase)
-    }
+    class ViewHolder(val binding: PassPhraseItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
