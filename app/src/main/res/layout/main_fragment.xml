@@ -35,11 +35,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:padding="4dp"
+            android:padding="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/copy_content"
             android:src="@drawable/ic_copy" />
+
+        <Spinner
+            android:id="@+id/tv_bit39Count"
+            android:layout_width="wrap_content"
+            android:entries="@array/bip39"
+            android:padding="8dp"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

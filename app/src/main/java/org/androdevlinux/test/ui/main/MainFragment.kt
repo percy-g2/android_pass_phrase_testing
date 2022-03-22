@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,7 @@ import org.androdevlinux.test.R
 import org.androdevlinux.test.databinding.MainFragmentBinding
 import org.androdevlinux.test.databinding.PassPhraseItemBinding
 import org.androdevlinux.test.ktx.showCustomPopup
+
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
@@ -38,7 +41,7 @@ class MainFragment : Fragment() {
                 adapter = passPhraseAdapter
             }
             refreshBtn.setOnClickListener {
-                viewModel.generateRandom(12)
+                viewModel.generateRandom(tvBit39Count.selectedItem.toString().toInt())
             }
             copyPassPhrasesBtn.setOnClickListener {
                 val clipboard: ClipboardManager? =
@@ -50,12 +53,23 @@ class MainFragment : Fragment() {
                 clipboard?.setPrimaryClip(clip)
                 requireContext().showCustomPopup("Pass phrases copied")
             }
+            viewModel.generateRandom(tvBit39Count.selectedItem.toString().toInt())
+            tvBit39Count.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.generateRandom(tvBit39Count.selectedItem.toString().toInt())
+                }
+            }
         }
         viewModel.randomListString.observe(viewLifecycleOwner) {
             passPhraseAdapter.updateList(it)
         }
-
-        viewModel.generateRandom(12)
     }
 }
 
@@ -77,19 +91,12 @@ class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
         val data = passPhraseList[position]
         holder.binding.tvPhrase.apply {
             text = data.passPhrase
-            setBackgroundColor(context.resources.getColor(data.passPhraseColor, context.theme))
-            if (data.passPhraseColor == R.color.yellow || data.passPhraseColor == R.color.turquoise
-                || data.passPhraseColor == R.color.light_brown || data.passPhraseColor == R.color.orange
-                || data.passPhraseColor == R.color.light_green) {
-                setTextColor(context.resources.getColorStateList(R.color.black, context.theme))
-            }
-            if (data.passPhraseColor == R.color.dark_blue || data.passPhraseColor == R.color.pink ||
-                data.passPhraseColor == R.color.black || data.passPhraseColor == R.color.light_blue
-                || data.passPhraseColor == R.color.red || data.passPhraseColor == R.color.indigio) {
-                setTextColor(context.resources.getColorStateList(R.color.white, context.theme))
-            }
+            setBackgroundColor(data.passPhraseColor)
+            if (isDark(data.passPhraseColor)) setTextColor(context.getColor(R.color.white)) else setTextColor(context.getColor(R.color.black))
         }
     }
+
+    private fun isDark(color: Int): Boolean = ColorUtils.calculateLuminance(color) < 0.5
 
     override fun getItemCount(): Int = passPhraseList.size
 
