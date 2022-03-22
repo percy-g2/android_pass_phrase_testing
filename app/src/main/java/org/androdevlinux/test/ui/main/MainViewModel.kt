@@ -17,7 +17,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val randomList = mutableListOf<PassPhrase>()
             for (i in 0 until n) {
-                val key = listOfPhase.random()
+                val key = listOfPhase.shuffled().random()
                 val rnd = Random.Default
                 val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
                 randomList.add(PassPhrase(key, color))
