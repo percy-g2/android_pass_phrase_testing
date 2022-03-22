@@ -6,22 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.androdevlinux.test.R
 import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
 
     private val randomListStringInternal = MutableLiveData<List<PassPhrase>>()
     val randomListString = randomListStringInternal
-
-    private fun getNum(v: ArrayList<Int>): Int {
-        val n = v.size
-        val index = (Math.random() * n).toInt()
-        val num = v[index]
-        v[index] = v[n - 1]
-        v.removeAt(n - 1)
-        return num
-    }
 
     fun generateRandom(n: Int) {
         viewModelScope.launch(Dispatchers.IO) {
