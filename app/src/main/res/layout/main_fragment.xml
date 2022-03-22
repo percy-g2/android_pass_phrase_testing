@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/content_very_large"
     tools:context=".ui.main.MainFragment">
 
     <LinearLayout
@@ -21,12 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="4dp"
+            android:layout_margin="@dimen/content_very_small"
             android:drawableEnd="@drawable/ic_refresh"
             android:text="@string/Refresh"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
-            app:cornerRadius="6dp"
+            app:cornerRadius="@dimen/content_small"
             app:strokeColor="@color/teal_200"
             tools:ignore="RtlCompat" />
 
@@ -34,8 +34,8 @@
             android:id="@+id/copyPassPhrasesBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:padding="8dp"
+            android:layout_marginHorizontal="@dimen/content_very_large"
+            android:padding="@dimen/content_medium"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/copy_content"
@@ -45,9 +45,8 @@
             android:id="@+id/tv_bit39Count"
             android:layout_width="wrap_content"
             android:entries="@array/bip39"
-            android:padding="8dp"
+            android:padding="@dimen/content_medium"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -77,9 +77,7 @@ class PassPhraseAdapter : RecyclerView.Adapter<PassPhraseAdapter.ViewHolder>() {
     private var passPhraseList = listOf<MainViewModel.PassPhrase>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            PassPhraseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+        ViewHolder(PassPhraseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     fun updateList(mList: List<MainViewModel.PassPhrase>) {
         passPhraseList = mList
